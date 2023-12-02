@@ -1,0 +1,16 @@
+<div class="d-flex flex-row justify-content-between mt-4">
+  <h6>Response Body:</h6>
+  <div>
+    <% if (data?.header) { %>
+    <div class="p-1 border bg-secondary rounded text-white">
+      <%= data?.header["Content-Type"] %>
+    </div>
+    <% } %>
+  </div>
+</div>
+<% if (data.body) { %>
+<pre class="p-4 mt-3 bg-black text-white rounded">
+    <%= data?.body %>
+  </pre
+>
+<% } %>

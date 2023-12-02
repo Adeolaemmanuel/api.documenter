@@ -1,0 +1,61 @@
+<div class="accordion" id="folders">
+  <% Object.keys(folders).forEach(folder => { %>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button
+        class="accordion-button bold bg-white border fs-5 font-monospace"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#<%= folder %>"
+        aria-expanded="true"
+        aria-controls="<%= folder %>"
+      >
+        <%= folder %>
+      </button>
+    </h2>
+    <div
+      id="<%= folder %>"
+      class="accordion-collapse collapse show"
+      data-bs-parent="#folders"
+    >
+      <div class="accordion-body">
+        <div class="accordion" id="folders/<%= folder %>">
+          <% folders[folder].forEach((data, ind2) => { %>
+          <div class="accordion-item mt-3 border rounded">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button d-flex flex-row"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#<%= folder %>-<%= ind2 %>"
+                aria-expanded="true"
+                aria-controls="<%= folder %>-<%= ind2 %>"
+              >
+                <div
+                  class="text-white fs-5 font-monospace p-1 rounded text-center"
+                >
+                  <kbd><%= data.method %></kbd>
+                </div>
+                <div class="fs-5"><%= data.path %></div>
+              </button>
+            </h2>
+            <div
+              id="<%= folder %>-<%= ind2 %>"
+              class="accordion-collapse collapse show"
+              data-bs-parent="#folders/<%= folder %>"
+            >
+              <div class="accordion-body">
+                <div class="d-flex flex-row justify-content-between">
+                  <button class="btn btn-success border">Try it out</button>
+                </div>
+                <%- include('components/response.body.ejs', {folders, baseUrl}); %>
+              </div>
+            </div>
+          </div>
+          <% }); %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% }); %>
+</div>
